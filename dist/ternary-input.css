@@ -1,0 +1,144 @@
+/*
+ * ternary-input - scoped styles for enhanced ternary buttons.
+ * All selectors and custom properties carry the "ternary" prefix.
+ *
+ * Public color variables (set on the button or any ancestor, or by JS options):
+ *   --ternary-fg, --ternary-bg
+ *   --ternary-neutral-fg, --ternary-neutral-bg
+ *   --ternary-positive-fg, --ternary-positive-bg
+ *   --ternary-negative-fg, --ternary-negative-bg
+ * Layout/theme variables:
+ *   --ternary-size          icon box edge (default 1.5em)
+ *   --ternary-gap           icon/text gap  (default 0.5em)
+ *   --ternary-target-size   minimum hit target (default 24px, 48px on coarse)
+ *   --ternary-focus-color   focus outline color
+ *   --ternary-radius        button corner radius
+ * Private resolved variables consumed by inline SVG paints:
+ *   --ternary-resolved-fg, --ternary-resolved-bg
+ */
+
+button.ternary-input {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: start;
+    gap: var(--ternary-gap, 0.5em);
+    min-block-size: var(--ternary-target-size, 24px);
+    min-inline-size: var(--ternary-target-size, 24px);
+    padding: var(--ternary-padding, 0.25em 0.5em);
+    border: var(--ternary-border, 1px solid color-mix(in srgb, currentColor 35%, transparent));
+    border-radius: var(--ternary-radius, 0.375em);
+    background: var(--ternary-button-bg, transparent);
+    color: inherit;
+    font: inherit;
+    line-height: 1.2;
+    cursor: pointer;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+@media (pointer: coarse) {
+    button.ternary-input {
+        min-block-size: var(--ternary-target-size, 48px);
+        min-inline-size: var(--ternary-target-size, 48px);
+    }
+}
+
+button.ternary-input:hover:not(:disabled) {
+    background: var(--ternary-button-hover-bg, color-mix(in srgb, currentColor 8%, transparent));
+}
+
+button.ternary-input:focus-visible {
+    outline: var(--ternary-focus-width, 3px) solid var(--ternary-focus-color, #0b57d0);
+    outline-offset: 2px;
+}
+
+button.ternary-input:disabled {
+    cursor: default;
+    opacity: var(--ternary-disabled-opacity, 0.55);
+}
+
+/* Decorative icon wrapper. Never contributes to the accessible name. */
+.ternary-input__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--ternary-size, 1.5em);
+    block-size: var(--ternary-size, 1.5em);
+    flex: none;
+}
+
+.ternary-input__svg {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Visible only under forced-colors, where palette colors may be dropped. */
+.ternary-input__state-text {
+    display: none;
+    font-size: 0.75em;
+    line-height: 1;
+}
+
+/*
+ * Per-state channel resolution: state override -> shared override -> preset
+ * default. Neutral foreground defaults to the ordinary text foreground;
+ * positive defaults green; negative defaults red. Library defaults sit at the
+ * end of every var() chain so they never mask author overrides.
+ */
+button.ternary-input[data-ternary-value="0"] .ternary-input__icon {
+    --ternary-resolved-fg: var(--ternary-neutral-fg, var(--ternary-fg, currentColor));
+    --ternary-resolved-bg: var(--ternary-neutral-bg, var(--ternary-bg, transparent));
+}
+button.ternary-input[data-ternary-value="1"] .ternary-input__icon {
+    --ternary-resolved-fg: var(--ternary-positive-fg, var(--ternary-fg, #1a7f37));
+    --ternary-resolved-bg: var(--ternary-positive-bg, var(--ternary-bg, transparent));
+}
+button.ternary-input[data-ternary-value="-1"] .ternary-input__icon {
+    --ternary-resolved-fg: var(--ternary-negative-fg, var(--ternary-fg, #cf222e));
+    --ternary-resolved-bg: var(--ternary-negative-bg, var(--ternary-bg, transparent));
+}
+
+/* Visually hidden but present for assistive technology. */
+.ternary-input__sr-only {
+    position: absolute !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+}
+
+@media (forced-colors: active) {
+    button.ternary-input {
+        border-color: ButtonBorder;
+        forced-color-adjust: auto;
+    }
+    button.ternary-input:focus-visible {
+        outline-color: Highlight;
+    }
+    .ternary-input__icon {
+        --ternary-resolved-fg: ButtonText;
+        --ternary-resolved-bg: ButtonFace;
+    }
+    .ternary-input__svg {
+        display: none;
+    }
+    .ternary-input__icon {
+        /* Let the state text size the wrapper so labels never overflow
+           the 1.5em icon box. */
+        inline-size: auto;
+        block-size: auto;
+        min-inline-size: var(--ternary-target-size, 24px);
+    }
+    .ternary-input__state-text {
+        display: inline;
+        color: ButtonText;
+        white-space: nowrap;
+    }
+}

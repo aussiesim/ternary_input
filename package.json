@@ -1,0 +1,45 @@
+{
+  "name": "ternary-input",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dependency-free three-state (-1/0/1) button input library with native labels, inline SVG presets, cascading palettes, and optional form participation.",
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
+  },
+  "main": "./dist/ternary-input.esm.js",
+  "module": "./dist/ternary-input.esm.js",
+  "types": "./dist/types/ternary-input.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/ternary-input.d.ts",
+      "import": "./dist/ternary-input.esm.js",
+      "default": "./dist/ternary-input.esm.js"
+    },
+    "./iife": "./dist/ternary-input.js",
+    "./css": "./dist/ternary-input.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "icons",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rollup -c && node scripts/build-css.mjs && tsc -p tsconfig.json --emitDeclarationOnly --declaration --outDir dist/types",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:browser": "node tests/browser.mjs"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^1.0.2",
+    "@rollup/plugin-typescript": "^12.3.1",
+    "clean-css": "^5.3.3",
+    "jsdom": "^29.1.1",
+    "puppeteer": "^25.18.1",
+    "rollup": "^4.68.8",
+    "tslib": "^2.9.1",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.1"
+  }
+}

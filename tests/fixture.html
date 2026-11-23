@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ternary-input browser fixture</title>
+<link rel="stylesheet" href="/dist/ternary-input.min.css">
+<style>
+:root {
+    --fixture-fg: #112233;
+    --fixture-pos: #0a7a28;
+}
+button { font: inherit; }
+</style>
+</head>
+<body>
+<button id="b1" name="f1"></button>
+<label id="l1" for="b1">Explicit label</label>
+
+<label id="wrap"><button id="b2" name="f2"></button><span id="wraptext">Wrapped text</span></label>
+
+<button id="b3">Inline text</button>
+<button id="b4" aria-label="Aria only"></button>
+
+<form id="form1">
+    <button id="b5" name="nf" aria-label="Named field"></button>
+    <fieldset disabled>
+        <legend>Group</legend>
+        <button id="b6" name="fs" aria-label="Fieldset field"></button>
+    </fieldset>
+    <fieldset disabled>
+        <legend><button id="b8" name="lg" aria-label="Legend field"></button>Legend control</legend>
+    </fieldset>
+</form>
+
+<form id="extf"></form>
+<button id="b7" name="e7" form="extf" aria-label="External field"></button>
+
+<button id="themed" name="th" aria-label="Themed"></button>
+<button id="customA" name="ca" aria-label="Custom A"></button>
+<button id="customB" name="cb" aria-label="Custom B"></button>
+<button id="pixelsvg" name="px" aria-label="Pixel palette"></button>
+<button id="bgonly" name="bo" aria-label="Background only"></button>
+<button id="plainimg" name="pi" aria-label="Plain image"></button>
+<button id="badicon" name="bi" aria-label="Bad icon"></button>
+<button id="activeicon" name="ai" aria-label="Active icon"></button>
+<button id="slowicon" name="si" aria-label="Slow icon"></button>
+
+<script src="/dist/ternary-input.min.js"></script>
+<script type="module" src="/tests/fixture.js"></script>
+</body>
+</html>

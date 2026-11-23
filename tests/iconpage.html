@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>all icons</title>
+<link rel="stylesheet" href="/dist/ternary-input.min.css">
+<style>
+body { font: 1rem system-ui; display: grid; grid-template-columns: repeat(9, auto); gap: 1rem; padding: 1rem; }
+button.ternary-input { --ternary-size: 4em; }
+</style>
+</head>
+<body>
+<script src="/dist/ternary-input.min.js"></script>
+<script>
+const presets = ["checkbox", "heart", "numbers"];
+const values = [-1, 0, 1];
+for (const v of values) {
+    for (const p of presets) {
+        const b = document.createElement("button");
+        b.setAttribute("aria-label", `${p} ${v}`);
+        document.body.appendChild(b);
+        TernaryInput.setupTernary(b, { preset: p, checked: v });
+    }
+}
+</script>
+</body>
+</html>

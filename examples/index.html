@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ternary Input Demo</title>
+<link rel="stylesheet" href="../dist/ternary-input.css">
+<link rel="stylesheet" href="./demo.css">
+</head>
+<body>
+<header>
+    <h1>Ternary Input</h1>
+    <p>A three-state (-1 / 0 / +1) button input with native labels, inline SVG
+    presets, cascading palettes, and ordinary form participation.</p>
+    <button type="button" id="theme-toggle">Toggle dark theme</button>
+</header>
+
+<main>
+    <section aria-labelledby="presets-h">
+        <h2 id="presets-h">Built-in presets</h2>
+        <div class="grid">
+            <div class="field">
+                <button type="button" id="preset-checkbox" name="agree"></button>
+                <label for="preset-checkbox">I agree to the terms</label>
+                <output for="preset-checkbox"></output>
+            </div>
+            <div class="field">
+                <button type="button" id="preset-heart" name="favourite"></button>
+                <label for="preset-heart">Favourite</label>
+                <output for="preset-heart"></output>
+            </div>
+            <div class="field">
+                <button type="button" id="preset-numbers" name="score"></button>
+                <label for="preset-numbers">Score</label>
+                <output for="preset-numbers"></output>
+            </div>
+        </div>
+    </section>
+
+    <section aria-labelledby="labels-h">
+        <h2 id="labels-h">Author-owned labeling</h2>
+        <div class="grid">
+            <div class="field">
+                <label class="wrap">
+                    <button type="button" id="wrapped"></button>
+                    <span>Wrapping label text</span>
+                </label>
+            </div>
+            <div class="field">
+                <button type="button" id="inline-text">Keep my inline text</button>
+            </div>
+            <div class="field">
+                <button type="button" id="aria-only" aria-label="Rating"></button>
+            </div>
+        </div>
+    </section>
+
+    <section aria-labelledby="states-h">
+        <h2 id="states-h">Custom state names and cycle</h2>
+        <div class="field">
+            <button type="button" id="vote"></button>
+            <label for="vote">Your vote</label>
+        </div>
+    </section>
+
+    <section aria-labelledby="custom-h">
+        <h2 id="custom-h">Custom recolorable SVG and unchanged images</h2>
+        <div class="grid">
+            <div class="field">
+                <button type="button" id="custom-svg"></button>
+                <label for="custom-svg">Recolorable custom SVG (purple accent stays fixed)</label>
+            </div>
+            <div class="field">
+                <button type="button" id="custom-img"></button>
+                <label for="custom-img">Unchanged image URLs</label>
+            </div>
+        </div>
+    </section>
+
+    <section aria-labelledby="colors-h">
+        <h2 id="colors-h">Independent shared/state palettes</h2>
+        <div class="grid">
+            <div class="field">
+                <button type="button" id="color-shared"></button>
+                <label for="color-shared">Shared fg/bg literals</label>
+            </div>
+            <div class="field">
+                <button type="button" id="color-mixed"></button>
+                <label for="color-mixed">Shared + state overrides</label>
+            </div>
+            <div class="field themed">
+                <button type="button" id="color-vars"></button>
+                <label for="color-vars">var()-backed theme colors</label>
+            </div>
+        </div>
+    </section>
+
+    <section aria-labelledby="forms-h">
+        <h2 id="forms-h">Forms</h2>
+        <form id="demo-form">
+            <fieldset>
+                <legend>Preferences</legend>
+                <div class="field">
+                    <button type="button" id="form-named" name="preference"></button>
+                    <label for="form-named">Named field</label>
+                </div>
+                <div class="field">
+                    <button type="button" id="form-unnamed"></button>
+                    <label for="form-unnamed">Unnamed (not submitted)</label>
+                </div>
+            </fieldset>
+            <fieldset id="disabled-fs" disabled>
+                <legend>Disabled fieldset</legend>
+                <div class="field">
+                    <button type="button" id="form-fieldset" name="fieldset_value"></button>
+                    <label for="form-fieldset">Inside disabled fieldset</label>
+                </div>
+            </fieldset>
+            <div class="field">
+                <button type="button" id="form-disabled" name="disabled_pref" disabled></button>
+                <label for="form-disabled">Single disabled instance</label>
+            </div>
+            <div class="actions">
+                <button type="button" id="inspect">Inspect FormData</button>
+                <button type="reset">Reset form</button>
+                <output id="formdata-out"></output>
+            </div>
+        </form>
+        <form id="external-form">
+            <input type="hidden" name="marker" value="external">
+        </form>
+        <div class="field">
+            <button type="button" id="form-external" name="external_pref" form="external-form"></button>
+            <label for="form-external">External form association</label>
+        </div>
+        <div class="actions">
+            <button type="button" id="inspect-external">Inspect external FormData</button>
+            <output id="external-out"></output>
+        </div>
+    </section>
+
+    <section aria-labelledby="api-h">
+        <h2 id="api-h">Programmatic control</h2>
+        <div class="field">
+            <button type="button" id="api-demo"></button>
+            <label for="api-demo">API-controlled</label>
+        </div>
+        <div class="actions">
+            <button type="button" id="api-silent">Set +1 silently</button>
+            <button type="button" id="api-emit">Set -1 with emit</button>
+            <button type="button" id="api-disable">Toggle disabled</button>
+            <output id="api-out"></output>
+        </div>
+    </section>
+
+    <section aria-labelledby="classic-h">
+        <h2 id="classic-h">Classic script build</h2>
+        <div class="field">
+            <button type="button" id="classic" name="classic"></button>
+            <label for="classic">Initialized from the IIFE global</label>
+        </div>
+    </section>
+</main>
+
+<script src="../dist/ternary-input.js"></script>
+<script type="module" src="./demo.js"></script>
+</body>
+</html>
