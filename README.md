@@ -1,5 +1,7 @@
 # ternary-input
 
+[![CI](https://github.com/aussiesim/ternary_input/actions/workflows/ci.yml/badge.svg)](https://github.com/aussiesim/ternary_input/actions/workflows/ci.yml)
+
 A dependency-free browser library that enhances an existing
 `<button>` into a three-state input with numeric values `-1`, `0`, and `1`.
 Native, author-owned HTML labels provide naming and click forwarding; built-in
@@ -291,3 +293,18 @@ but less discoverable than three explicit radio choices - always give each
 control a meaningful field name and state labels, and prefer radios when
 discoverability matters more than space. The library submits `-1`/`0`/`1`
 strings; servers must validate them like any client input.
+
+## Maintenance and releases
+
+CI runs type checking, a build, and unit tests on pushes and pull requests. Run the browser checks locally before a release.
+
+1. Update the version with `npm version patch --no-git-tag-version` (or `minor` / `major` as appropriate); this updates both package files without tagging.
+2. Run `npm ci`, `npm run typecheck`, `npm run build`, `npm test`, and `npm run test:browser`.
+3. Review source and generated `dist/` changes together, then commit them with the version update. Keep `node_modules/` and `tests/.artifacts/` out of Git.
+4. After review, push the commit, verify CI passes, then create and push the matching `vX.Y.Z` tag and write GitHub release notes. These are deliberate manual steps, not automatic deployment.
+
+The package remains `private: true` to prevent accidental npm publication. Consumers can use the committed `dist/` files; a GitHub tag or release does not publish to npm.
+
+## License
+
+[MIT No Attribution (MIT-0)](LICENSE). Commercial use, modification, and redistribution are permitted without an attribution requirement. The software is provided without warranty.

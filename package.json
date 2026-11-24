@@ -2,6 +2,15 @@
   "name": "ternary-input",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT-0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aussiesim/ternary_input.git"
+  },
+  "homepage": "https://github.com/aussiesim/ternary_input#readme",
+  "bugs": {
+    "url": "https://github.com/aussiesim/ternary_input/issues"
+  },
   "description": "Dependency-free three-state (-1/0/1) button input library with native labels, inline SVG presets, cascading palettes, and optional form participation.",
   "type": "module",
   "engines": {
